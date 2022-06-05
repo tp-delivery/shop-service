@@ -18,4 +18,12 @@ class ShopJpaEntity {
 
     @Column(length = 20)
     private String name;
+
+    private ShopJpaEntity(String name) {
+        this.name = name;
+    }
+
+    public static ShopJpaEntity of(String name) {
+        return new ShopJpaEntity(name);
+    }
 }

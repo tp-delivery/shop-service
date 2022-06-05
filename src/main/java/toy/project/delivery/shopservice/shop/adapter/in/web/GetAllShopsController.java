@@ -22,7 +22,6 @@ public class GetAllShopsController {
             @RequestParam(required = false, defaultValue = "0") int offset,
             @RequestParam(required = false, defaultValue = "10") int max
     ) {
-
         List<Shop> shops = getAllShopsUseCase.getAllShops(offset, max);
 
         GetAllShopsDto getAllShopsDto = getAllShopsMapper.mapToWebModel(shops);

@@ -43,4 +43,13 @@ class ShopPersistenceAdapterTest {
         assertThat(shops.size()).isEqualTo(2);
         assertThat(shops.get(0).getName()).isEqualTo("shop11");
     }
+
+    @Test
+    void registerShop() {
+        String name = "new_shop";
+        Shop shop = shopPersistenceAdapter.registerShop(name);
+
+        assertThat(shop.getId()).isNotNull();
+        assertThat(shop.getName()).isEqualTo(name);
+    }
 }
