@@ -12,7 +12,12 @@ class GetAllShopsMapper {
     public GetAllShopsDto mapToWebModel(List<Shop> shopList) {
         return GetAllShopsDto.of(
                 shopList.stream()
-                        .map(ShopDto::of)
+                        .map(shop -> ShopDto.of(
+                                shop.getId(),
+                                shop.getName(),
+                                shop.getAddress(),
+                                shop.getPhoneNumber())
+                        )
                         .collect(Collectors.toList())
         );
     }

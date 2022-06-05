@@ -6,6 +6,10 @@ import toy.project.delivery.shopservice.shop.application.port.in.RegisterShopCom
 @Component
 class RegisterShopMapper {
     public RegisterShopCommand mapToCommand(RegisterShopDto registerShopDto) {
-        return RegisterShopCommand.of(registerShopDto.getName());
+        return RegisterShopCommand.of(
+                registerShopDto.getName(),
+                registerShopDto.getAddress(),
+                registerShopDto.getPhoneNumber()
+        );
     }
 }

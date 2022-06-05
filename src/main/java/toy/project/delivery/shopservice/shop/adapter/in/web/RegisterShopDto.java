@@ -10,11 +10,15 @@ import lombok.NoArgsConstructor;
 class RegisterShopDto {
     private String name;
 
+    private String address;
+
+    private String phoneNumber;
+
     private RegisterShopDto(String name) {
         this.name = name;
     }
 
-    public static RegisterShopDto of(String name) {
+    public static RegisterShopDto of(String name, String address, String phoneNumber) {
         return new RegisterShopDto(name);
     }
 }

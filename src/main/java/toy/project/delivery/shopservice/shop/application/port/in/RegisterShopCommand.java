@@ -6,4 +6,8 @@ import lombok.Value;
 public class RegisterShopCommand {
 
     String name;
+
+    String address;
+
+    String phoneNumber;
 }

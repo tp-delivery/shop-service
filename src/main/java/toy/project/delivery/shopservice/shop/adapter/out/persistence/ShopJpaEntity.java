@@ -1,14 +1,15 @@
 package toy.project.delivery.shopservice.shop.adapter.out.persistence;
 
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "SHOPS")
 @Getter
+@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor
 class ShopJpaEntity {
 
@@ -19,11 +20,10 @@ class ShopJpaEntity {
     @Column(length = 20)
     private String name;
 
-    private ShopJpaEntity(String name) {
-        this.name = name;
-    }
+    @Column(length = 100)
+    private String address;
 
-    public static ShopJpaEntity of(String name) {
-        return new ShopJpaEntity(name);
-    }
+    @Column(length = 20)
+    private String phoneNumber;
+
 }

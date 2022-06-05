@@ -31,8 +31,8 @@ class RegisterShopControllerTest {
 
     @Test
     void registerShop() throws Exception {
-        RegisterShopDto registerShopDto = RegisterShopDto.of("test1");
-        RegisterShopCommand registerShopCommand = RegisterShopCommand.of("test1");
+        RegisterShopDto registerShopDto = RegisterShopDto.of("name", "address", "phoneNumber");
+        RegisterShopCommand registerShopCommand = RegisterShopCommand.of("name", "address", "phoneNumber");
 
         given(registerShopMapper.mapToCommand(registerShopDto))
                 .willReturn(registerShopCommand);

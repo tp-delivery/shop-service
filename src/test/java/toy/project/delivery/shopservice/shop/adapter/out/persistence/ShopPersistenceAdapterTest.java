@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.jdbc.Sql;
+import toy.project.delivery.shopservice.shop.application.port.out.CreateShopCommand;
 import toy.project.delivery.shopservice.shop.domain.Shop;
 
 import java.util.List;
@@ -46,10 +47,16 @@ class ShopPersistenceAdapterTest {
 
     @Test
     void registerShop() {
-        String name = "new_shop";
-        Shop shop = shopPersistenceAdapter.registerShop(name);
+        String name = "name";
+        String address = "address";
+        String phoneNumber = "phoneNumber";
+        Shop shop = shopPersistenceAdapter.createShop(
+                CreateShopCommand.of(name, address, phoneNumber)
+        );
 
         assertThat(shop.getId()).isNotNull();
         assertThat(shop.getName()).isEqualTo(name);
+        assertThat(shop.getAddress()).isEqualTo(address);
+        assertThat(shop.getPhoneNumber()).isEqualTo(phoneNumber);
     }
 }
