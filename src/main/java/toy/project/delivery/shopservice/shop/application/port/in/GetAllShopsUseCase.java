@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface GetAllShopsUseCase {
 
-    List<Shop> getAllShops();
+    List<Shop> getAllShops(int offset, int max);
 }

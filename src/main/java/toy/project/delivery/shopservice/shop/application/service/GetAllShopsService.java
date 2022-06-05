@@ -15,7 +15,7 @@ class GetAllShopsService implements GetAllShopsUseCase {
     private final LoadAllShopsPort loadAllShopsPort;
 
     @Override
-    public List<Shop> getAllShops() {
-        return loadAllShopsPort.loadAllShops();
+    public List<Shop> getAllShops(int offset, int max) {
+        return loadAllShopsPort.loadAllShops(offset, max);
     }
 }

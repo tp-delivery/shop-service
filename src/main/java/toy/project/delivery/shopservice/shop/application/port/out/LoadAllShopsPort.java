@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface LoadAllShopsPort {
 
-    List<Shop> loadAllShops();
+    List<Shop> loadAllShops(int offset, int max);
 }

@@ -19,29 +19,34 @@ class GetAllShopsServiceTest {
 
     @Test
     void givenEmptyShopList_thenEmptyResult() {
-        givenEmptyShopList();
+        int offset = 0;
+        int max = 10;
+        givenEmptyShopList(offset, max);
 
-        List<Shop> allShops = getAllShopsService.getAllShops();
+        List<Shop> allShops = getAllShopsService.getAllShops(offset, max);
 
         assertThat(allShops).isEmpty();
     }
 
     @Test
     void givenTwoShopList_thenSameResult() {
-        List<Shop> shopList = givenTwoShopList();
+        int offset = 0;
+        int max = 10;
 
-        List<Shop> allShops = getAllShopsService.getAllShops();
+        List<Shop> shopList = givenTwoShopList(offset, max);
+
+        List<Shop> allShops = getAllShopsService.getAllShops(offset, max);
 
         assertThat(allShops).isEqualTo(shopList);
     }
 
-    private void givenEmptyShopList() {
-        given(loadAllShopsPort.loadAllShops()).willReturn(List.of());
+    private void givenEmptyShopList(int offset, int max) {
+        given(loadAllShopsPort.loadAllShops(offset, max)).willReturn(List.of());
     }
 
-    private List<Shop> givenTwoShopList() {
+    private List<Shop> givenTwoShopList(int offset, int max) {
         List<Shop> shopList = List.of(givenShop(1L), givenShop(2L));
-        given(loadAllShopsPort.loadAllShops()).willReturn(shopList);
+        given(loadAllShopsPort.loadAllShops(offset, max)).willReturn(shopList);
         return shopList;
     }
 
@@ -50,5 +55,4 @@ class GetAllShopsServiceTest {
         given(shop.getId()).willReturn(id);
         return shop;
     }
-
 }

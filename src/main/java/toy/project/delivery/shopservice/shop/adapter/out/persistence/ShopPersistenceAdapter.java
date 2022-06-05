@@ -1,6 +1,9 @@
 package toy.project.delivery.shopservice.shop.adapter.out.persistence;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import toy.project.delivery.shopservice.shop.application.port.out.LoadAllShopsPort;
 import toy.project.delivery.shopservice.shop.domain.Shop;
@@ -16,11 +19,10 @@ class ShopPersistenceAdapter implements LoadAllShopsPort {
     private final ShopMapper shopMapper;
 
     @Override
-    public List<Shop> loadAllShops() {
+    public List<Shop> loadAllShops(int offset, int max) {
+        Page<ShopJpaEntity> shopJpaEntityPage = shopRepository.findAll(PageRequest.of(offset, max));
 
-        List<ShopJpaEntity> shopJpaEntityList = shopRepository.findAll();
-
-        return shopJpaEntityList.stream()
+        return shopJpaEntityPage.stream()
                 .map(shopMapper::mapToDomainEntity)
                 .collect(Collectors.toList());
     }

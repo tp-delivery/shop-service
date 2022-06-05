@@ -27,25 +27,45 @@ class GetAllShopsControllerTest {
     @MockBean
     private GetAllShopsMapper getAllShopsMapper;
 
-
     @Test
-    void getAllShops() throws Exception {
-        List<Shop> shops = givenTwoShopList();
+    void getAllShops_without_offset_max() throws Exception {
+        int defaultOffset = 0;
+        int defaultMax = 10;
+        List<Shop> shops = givenTwoShopList(0, 10);
 
         mockMvc.perform(get("/shops")
                 .header("Content-Type", "application/json")
         ).andExpect(status().isOk());
 
         then(getAllShopsUseCase).should()
-                .getAllShops();
+                .getAllShops(eq(defaultOffset), eq(defaultMax));
 
         then(getAllShopsMapper).should()
                 .mapToWebModel(eq(shops));
     }
 
-    private List<Shop> givenTwoShopList() {
+    @Test
+    void getAllShops_with_offset_max() throws Exception {
+        int offset = 0;
+        int max = 10;
+        List<Shop> shops = givenTwoShopList(offset, max);
+
+        mockMvc.perform(get("/shops")
+                .header("Content-Type", "application/json")
+                .param("offset", Integer.toString(offset))
+                .param("max", Integer.toString(max))
+        ).andExpect(status().isOk());
+
+        then(getAllShopsUseCase).should()
+                .getAllShops(eq(offset), eq(max));
+
+        then(getAllShopsMapper).should()
+                .mapToWebModel(eq(shops));
+    }
+
+    private List<Shop> givenTwoShopList(int offset, int max) {
         List<Shop> shopList = List.of(givenShop(1L), givenShop(2L));
-        given(getAllShopsUseCase.getAllShops()).willReturn(shopList);
+        given(getAllShopsUseCase.getAllShops(offset, max)).willReturn(shopList);
         return shopList;
     }
 
