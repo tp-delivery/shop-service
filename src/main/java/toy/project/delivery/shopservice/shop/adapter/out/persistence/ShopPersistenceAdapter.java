@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 class ShopPersistenceAdapter implements LoadAllShopsPort, CreateShopPort {
-
     private final ShopRepository shopRepository;
     private final ShopMapper shopMapper;
 
@@ -35,6 +34,7 @@ class ShopPersistenceAdapter implements LoadAllShopsPort, CreateShopPort {
                 .address(command.getAddress())
                 .phoneNumber(command.getPhoneNumber())
                 .build();
-        return shopMapper.mapToDomainEntity(shopRepository.save(entity));
+        ShopJpaEntity saved = shopRepository.save(entity);
+        return shopMapper.mapToDomainEntity(saved);
     }
 }

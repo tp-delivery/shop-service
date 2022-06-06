@@ -19,7 +19,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(controllers = RegisterShopController.class)
 class RegisterShopControllerTest {
-
     @Autowired
     private MockMvc mockMvc;
     @MockBean
@@ -31,7 +30,11 @@ class RegisterShopControllerTest {
 
     @Test
     void registerShop() throws Exception {
-        RegisterShopDto registerShopDto = RegisterShopDto.of("name", "address", "phoneNumber");
+        RegisterShopDto registerShopDto = RegisterShopDto.builder()
+                .name("name")
+                .address("address")
+                .phoneNumber("phoneNuber")
+                .build();
         RegisterShopCommand registerShopCommand = RegisterShopCommand.of("name", "address", "phoneNumber");
 
         given(registerShopMapper.mapToCommand(registerShopDto))

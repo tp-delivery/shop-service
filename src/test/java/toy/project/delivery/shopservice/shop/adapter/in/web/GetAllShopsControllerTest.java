@@ -19,7 +19,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(controllers = GetAllShopsController.class)
 class GetAllShopsControllerTest {
-
     @Autowired
     private MockMvc mockMvc;
     @MockBean
@@ -31,7 +30,7 @@ class GetAllShopsControllerTest {
     void getAllShops_without_offset_max() throws Exception {
         int defaultOffset = 0;
         int defaultMax = 10;
-        List<Shop> shops = givenTwoShopList(0, 10);
+        List<Shop> shops = givenShops(defaultOffset, defaultMax);
 
         mockMvc.perform(get("/shops")
                 .header("Content-Type", "application/json")
@@ -48,7 +47,7 @@ class GetAllShopsControllerTest {
     void getAllShops_with_offset_max() throws Exception {
         int offset = 0;
         int max = 10;
-        List<Shop> shops = givenTwoShopList(offset, max);
+        List<Shop> shops = givenShops(offset, max);
 
         mockMvc.perform(get("/shops")
                 .header("Content-Type", "application/json")
@@ -63,9 +62,10 @@ class GetAllShopsControllerTest {
                 .mapToWebModel(eq(shops));
     }
 
-    private List<Shop> givenTwoShopList(int offset, int max) {
+    private List<Shop> givenShops(int offset, int max) {
         List<Shop> shopList = List.of(givenShop(1L), givenShop(2L));
-        given(getAllShopsUseCase.getAllShops(offset, max)).willReturn(shopList);
+        given(getAllShopsUseCase.getAllShops(offset, max))
+                .willReturn(shopList);
         return shopList;
     }
 

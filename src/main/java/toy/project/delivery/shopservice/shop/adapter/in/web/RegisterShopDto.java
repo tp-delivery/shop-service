@@ -1,11 +1,11 @@
 package toy.project.delivery.shopservice.shop.adapter.in.web;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Getter
 @EqualsAndHashCode
+@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor
 class RegisterShopDto {
     private String name;
@@ -13,12 +13,4 @@ class RegisterShopDto {
     private String address;
 
     private String phoneNumber;
-
-    private RegisterShopDto(String name) {
-        this.name = name;
-    }
-
-    public static RegisterShopDto of(String name, String address, String phoneNumber) {
-        return new RegisterShopDto(name);
-    }
 }

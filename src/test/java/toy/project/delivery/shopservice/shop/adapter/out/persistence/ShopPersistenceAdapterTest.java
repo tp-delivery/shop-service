@@ -16,10 +16,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest
 @Import({ShopPersistenceAdapter.class, ShopMapper.class})
 class ShopPersistenceAdapterTest {
-
     @Autowired
     private ShopPersistenceAdapter shopPersistenceAdapter;
-
     @Autowired
     private ShopRepository shopRepository;
 
@@ -41,12 +39,14 @@ class ShopPersistenceAdapterTest {
         int max = 10;
         List<Shop> shops = shopPersistenceAdapter.loadAllShops(offset, max);
 
+        assertThat(shopRepository.count()).isEqualTo(12);
+
         assertThat(shops.size()).isEqualTo(2);
         assertThat(shops.get(0).getName()).isEqualTo("shop11");
     }
 
     @Test
-    void registerShop() {
+    void createShop() {
         String name = "name";
         String address = "address";
         String phoneNumber = "phoneNumber";

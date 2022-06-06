@@ -17,13 +17,13 @@ class ShopJpaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 20)
+    @Column(nullable = false, length = 20, unique = true)
     private String name;
 
-    @Column(length = 100)
+    @Column(nullable = false, length = 100)
     private String address;
 
-    @Column(length = 20)
+    @Column(nullable = false, length = 20, unique = true)
     private String phoneNumber;
 
 }
